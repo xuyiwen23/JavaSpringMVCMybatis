@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.udesk.dao.UserDao">
+
+<select id="findOne" resultType="com.udesk.entity.User">
+	select * from users where id = #{id}
+</select>
+
+<insert id="createUser" parameterType="com.udesk.entity.User" useGeneratedKeys="true" keyProperty="id">
+	insert into users(name,gender) value(#{name}, #{gender}) 
+</insert>
+
+<update id="updateUser" parameterType="com.udesk.entity.User">
+	update users 
+	set
+	 	<if test="name != null">
+	    	name=#{name},
+	    </if>
+	    <if test="gender != null">
+	    	gender=#{gender}
+	    </if>
+	where 
+	    id=#{id} 
+</update>
+
+</mapper>
